@@ -1,0 +1,20 @@
+# Build output
+bin/
+obj/
+
+# Rider project files
+.idea/
+riderModule.iml
+
+# ReSharper
+/_ReSharper.Caches/
+
+# NuGet packages (optional)
+packages/
+
+# Visual Studio/VS Code
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
