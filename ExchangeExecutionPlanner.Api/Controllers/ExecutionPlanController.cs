@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using ExchangeExecutionPlanner.Api.Utils;
 using ExchangeExecutionPlanner.Services;
 using ExchangeExecutionPlanner.Models;
 
@@ -40,8 +41,11 @@ namespace ExchangeExecutionPlanner.Api.Controllers;
             if (amount <= 0)
                 return BadRequest("Amount must be a positive number.");
 
-            if (!Enum.TryParse<OrderType>(orderType, true, out var orderTypeEnum))
+            // Only accept 'Buy' or 'Sell' (case-insensitive), but NOT numbers like '0' or '1'
+            if (string.IsNullOrWhiteSpace(orderType) || !OrderTypeValidator.IsAllowedOrderType(orderType))
                 return BadRequest("OrderType must be 'Buy' or 'Sell'.");
+
+            Enum.TryParse<OrderType>(orderType, true, out var orderTypeEnum);
 
             var plan = await _service.FindBestExecutionAsync(orderTypeEnum, amount);
             return Ok(plan);
