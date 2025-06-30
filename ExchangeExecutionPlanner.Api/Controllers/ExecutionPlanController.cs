@@ -1,0 +1,49 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using ExchangeExecutionPlanner.Services;
+using ExchangeExecutionPlanner.Models;
+
+namespace ExchangeExecutionPlanner.Api.Controllers;
+
+    [ApiController]
+    [Route("[controller]")]
+    public class ExecutionPlanController : ControllerBase
+    {
+        private readonly IExchangeExecutionService _service;
+
+        public ExecutionPlanController(IExchangeExecutionService service)
+        {
+            _service = service;
+        }
+
+        /// <summary>
+        /// Returns the best execution plan for the requested order type and amount.
+        /// </summary>
+        /// <param name="orderType">Order type: 'Buy' or 'Sell'.</param>
+        /// <param name="amount">Order amount in BTC (must be positive).</param>
+        /// <returns>The best execution plan matching the order type and amount.</returns>
+        /// <response code="200">Returns the execution plan.</response>
+        /// <response code="400">Invalid order type or amount.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <remarks>
+        /// This endpoint takes an order type (Buy or Sell) and an amount (BTC), and returns the best execution plan across all exchanges.
+        /// </remarks>
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ExecutionPlan), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [HttpGet]
+        public async Task<IActionResult> GetExecutionPlan(
+            [FromQuery] string orderType,
+            [FromQuery] decimal amount)
+        {
+            if (amount <= 0)
+                return BadRequest("Amount must be a positive number.");
+
+            if (!Enum.TryParse<OrderType>(orderType, true, out var orderTypeEnum))
+                return BadRequest("OrderType must be 'Buy' or 'Sell'.");
+
+            var plan = await _service.FindBestExecutionAsync(orderTypeEnum, amount);
+            return Ok(plan);
+        }
+    }
