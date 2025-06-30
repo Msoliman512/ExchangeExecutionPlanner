@@ -4,5 +4,5 @@ namespace ExchangeExecutionPlanner.Services;
 
 public interface IExchangeExecutionService
 {
-    Task<ExecutionPlan> FindBestExecutionAsync(string orderType, decimal amount);
+    Task<ExecutionPlan> FindBestExecutionAsync(OrderType orderType, decimal amount);
 }

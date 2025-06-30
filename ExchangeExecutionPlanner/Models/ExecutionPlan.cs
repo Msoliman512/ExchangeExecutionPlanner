@@ -2,14 +2,21 @@
 
 public class ExecutionPlan
 {
-    public string ExchangeId { get; set; }
     public string OrderType { get; set; } // "Buy" or "Sell"
     public decimal RequestedAmount { get; set; }
     public decimal FilledAmount { get; set; }
-    public List<OrderMatch> Matches { get; set; } = new();
+    public List<ExchangeExecution> ExchangeExecutions { get; set; } = new();
     public decimal TotalCostOrProceeds { get; set; } // EUR spent or received
     public decimal AveragePrice { get; set; }
     public bool IsFullyFilled { get; set; }
+}
+
+public class ExchangeExecution
+{
+    public string ExchangeId { get; set; }
+    public decimal FilledAmount { get; set; }
+    public List<OrderMatch> Matches { get; set; } = new();
+    public decimal ExchangeCostOrProceeds { get; set; }
 }
 
 public class OrderMatch
