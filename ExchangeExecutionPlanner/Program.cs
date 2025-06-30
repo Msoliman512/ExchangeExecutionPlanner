@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ExchangeExecutionPlanner.Data;
 using ExchangeExecutionPlanner.Services;
 using ExchangeExecutionPlanner.Models;
+using ExchangeExecutionPlanner.Repositories;
 
 Console.WriteLine("=== Exchange Execution Planner ===");
 

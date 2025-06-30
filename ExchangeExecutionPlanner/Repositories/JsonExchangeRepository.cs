@@ -1,11 +1,11 @@
 ﻿using System.Text.Json;
 using ExchangeExecutionPlanner.Models;
 
-namespace ExchangeExecutionPlanner.Data;
+namespace ExchangeExecutionPlanner.Repositories;
 
 public class JsonExchangeRepository : IExchangeRepository
 {
-    private const string DefaultFolderPath = "Data/Exchanges";
+    private const string DefaultFolderPath = "../Data/Exchanges";
     private readonly string _folderPath;
 
     public JsonExchangeRepository(string? folderPath = null)

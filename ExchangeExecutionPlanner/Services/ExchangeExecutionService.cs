@@ -1,5 +1,5 @@
-﻿using ExchangeExecutionPlanner.Data;
-using ExchangeExecutionPlanner.Models;
+﻿using ExchangeExecutionPlanner.Models;
+using ExchangeExecutionPlanner.Repositories;
 
 namespace ExchangeExecutionPlanner.Services;
 

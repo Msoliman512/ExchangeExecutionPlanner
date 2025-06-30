@@ -1,6 +1,6 @@
 ﻿using ExchangeExecutionPlanner.Models;
 
-namespace ExchangeExecutionPlanner.Data;
+namespace ExchangeExecutionPlanner.Repositories;
 
 public interface IExchangeRepository
 {

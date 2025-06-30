@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Xunit;
 using Moq;
 using ExchangeExecutionPlanner.Models;
+using ExchangeExecutionPlanner.Repositories;
 using ExchangeExecutionPlanner.Services;
-using ExchangeExecutionPlanner.Data;
 
 namespace ExchangeExecutionPlanner.Tests.Services;
 
