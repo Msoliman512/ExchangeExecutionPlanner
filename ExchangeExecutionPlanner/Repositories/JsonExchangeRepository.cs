@@ -5,7 +5,7 @@ namespace ExchangeExecutionPlanner.Repositories;
 
 public class JsonExchangeRepository : IExchangeRepository
 {
-    private const string DefaultFolderPath = "../Data/Exchanges";
+    private const string DefaultFolderPath = "Data/Exchanges";
     private readonly string _folderPath;
 
     public JsonExchangeRepository(string? folderPath = null)
@@ -36,6 +36,7 @@ public class JsonExchangeRepository : IExchangeRepository
                 Console.WriteLine($"[WARN] Failed to parse exchange file: {file}. Error: {ex.Message}");
             }
         }
+
         return result;
     }
 }

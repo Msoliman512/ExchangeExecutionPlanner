@@ -14,12 +14,12 @@
         </Content>
     </ItemGroup>
 
-    <!-- ADD THIS ITEMGROUP BELOW -->
-    <ItemGroup>
-        <None Include="Data\Exchanges\**\*.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+<ItemGroup>
+    <None Include="..\Data\Exchanges\**\*.json">
+        <Link>Data\Exchanges\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+</ItemGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-preview.5.25277.114" />
     </ItemGroup>
