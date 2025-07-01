@@ -1,10 +1,6 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Xunit;
-using System.Linq;
-using ExchangeExecutionPlanner.Repositories;
+﻿using ExchangeExecutionPlanner.Repositories;
 
-namespace ExchangeExecutionPlanner.Tests.Data
+namespace TestProject1.Repositories
 {
     public class JsonExchangeRepositoryTests
     {
