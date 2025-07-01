@@ -32,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+Console.WriteLine($"[DEBUG] ASPNETCORE_ENVIRONMENT = {app.Environment.EnvironmentName}");
+
 app.UseHttpsRedirection();
 app.MapControllers();
 

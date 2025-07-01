@@ -17,4 +17,5 @@ RUN dotnet publish "ExchangeExecutionPlanner.Api.csproj" -c Release -o /app/publ
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY Data ./Data    
 ENTRYPOINT ["dotnet", "ExchangeExecutionPlanner.Api.dll"]
