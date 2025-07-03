@@ -105,17 +105,17 @@ Data/Exchanges/
 
 ### Console Application
 ```bash
-cd ExchangeExecutionPlanner
-dotnet run
+cd "project root directory"
+dotnet run --project ExchangeExecutionPlanner\ExchangeExecutionPlanner.csproj
 ```
 
 ### API (Local Development)
 ```bash
-cd ExchangeExecutionPlanner.Api
-dotnet run
+cd "project root directory"
+dotnet run --project ExchangeExecutionPlanner.Api\ExchangeExecutionPlanner.Api.csproj
 ```
 
-The API will be available at `https://localhost:7071` with Swagger documentation at `https://localhost:7071/swagger/index.html`. 
+The API will be available at `https://localhost:[port]` with Swagger documentation at `https://localhost:[port]/swagger/index.html`. 
 
 *Note: Port numbers may vary based on availability.*
 
