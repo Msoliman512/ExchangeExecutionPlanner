@@ -16,6 +16,10 @@ This project implements a smart order routing system that:
 
 The system works by aggregating order books from different exchanges and using a greedy algorithm to select the best prices while ensuring sufficient balances are available on each exchange.
 
+## Demo
+
+https://github.com/user-attachments/assets/541f609d-6749-4da6-8aaf-46aef096d4fc
+
 ## Technologies Used
 
 **Backend**
