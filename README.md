@@ -2,6 +2,10 @@
 
 A meta-exchange system that finds the best possible prices across multiple cryptocurrency exchanges for Bitcoin (BTC) trading. The system optimizes buy/sell orders to achieve the lowest cost when buying or highest revenue when selling BTC, while respecting each exchange's balance constraints.
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![.NET 8](https://img.shields.io/badge/.NET-8.0-blue.svg)](https://dotnet.microsoft.com/download/dotnet/8.0)
+[![Docker](https://img.shields.io/badge/Docker-Supported-blue.svg)](https://www.docker.com/)
+
 ## Overview
 
 This project implements a smart order routing system that:
@@ -11,6 +15,25 @@ This project implements a smart order routing system that:
 - Provides both console application and REST API interfaces
 
 The system works by aggregating order books from different exchanges and using a greedy algorithm to select the best prices while ensuring sufficient balances are available on each exchange.
+
+## Technologies Used
+
+**Backend**
+- **.NET 8** – Main framework for both the console and API applications
+- **C#** – Core language for business logic, data models, and services
+- **ASP.NET Core Web API** – For RESTful endpoint implementation
+- **xUnit** – Unit testing framework for .NET
+- **Moq** – Mocking library for writing effective unit tests
+- **Swagger (Swashbuckle)** – Auto-generated, interactive API documentation
+- **Docker** – Containerization for easy deployment and consistent environments
+- **JSON** – Data exchange format for exchange orderbooks and configuration files
+
+**Architecture & Design Patterns**
+- **Clean Architecture** – Separation of concerns with Core/Infrastructure/API layers
+- **Repository Pattern** – Abstracted data access for future extensibility
+- **Service Layer Pattern** – Business logic separation and organization
+- **SOLID Principles** – Maintainable and testable code structure
+- **Dependency Injection** – Built-in .NET DI container for loose coupling
 
 ## Architecture
 
@@ -28,12 +51,10 @@ The solution follows a clean architecture pattern with clear separation of conce
 
 ```
 ExchangeExecutionPlanner/
-├── ExchangeExecutionPlanner.Core/          # Core business logic
-├── ExchangeExecutionPlanner.Api/           # REST API endpoints
-├── ExchangeExecutionPlanner.Console/       # Console application
-├── ExchangeExecutionPlanner.Tests/         # Unit tests
-├── Data/Exchanges/                          # Exchange data files
-└── README.md
+├── Data/Exchanges/                        # Exchange data files (JSON)
+├── ExchangeExecutionPlanner/              # Core business logic + Console application
+├── ExchangeExecutionPlanner.Api/          # REST API endpoints
+└── ExchangeExecutionPlanner.Tests/        # Unit tests
 ```
 
 ## Features
@@ -62,7 +83,7 @@ ExchangeExecutionPlanner/
 dotnet --version
 ```
 
-If you don't have .NET 8.0 installed, download it from [Microsoft .NET Downloads](https://dotnet.microsoft.com/download).
+If you don't have .NET 8.0 installed, download it from [Microsoft .NET Downloads](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 ### 2. Clone the Repository
 ```bash
@@ -84,7 +105,7 @@ Data/Exchanges/
 
 ### Console Application
 ```bash
-cd ExchangeExecutionPlanner.Console
+cd ExchangeExecutionPlanner
 dotnet run
 ```
 
@@ -94,7 +115,9 @@ cd ExchangeExecutionPlanner.Api
 dotnet run
 ```
 
-The API will be available at `https://localhost:7071` with Swagger documentation at `https://localhost:7071/swagger/index.html`. "ports changes according to availability"
+The API will be available at `https://localhost:7071` with Swagger documentation at `https://localhost:7071/swagger/index.html`. 
+
+*Note: Port numbers may vary based on availability.*
 
 ## Docker Deployment
 
@@ -139,10 +162,16 @@ Run the unit tests:
 dotnet test
 ```
 
+The test suite includes:
+- **Core Logic Testing**: Validates order execution algorithms
+- **Edge Case Coverage**: Tests boundary conditions and error scenarios
+- **Repository Testing**: Ensures data access layer reliability
+- **Service Layer Testing**: Verifies business logic correctness
+
 ## Enhancement Roadmap
 
 ### Future Enhancements
-- **Architecture Refactoring**: Split into Core/Infrastructure/API projects for better separation of concerns
+- **Architecture Refactoring**: Split into Core/Infrastructure/API projects for better separation of concerns. *We can split the core project to only have the service layer and repository layer and have another project for the console app so we have better separation of concerns. This way, even if we use the core app as a package, we don't have coupling issues.*
 - **Integration Testing**: Add comprehensive API endpoint testing with WebApplicationFactory
 - **CI/CD Pipeline**: Implement GitHub Actions for automated building and testing
 - **Database Integration**: Add support for SQL/NoSQL databases alongside file-based storage
@@ -150,18 +179,19 @@ dotnet test
 - **Code Quality**: Implement linting, nullable reference checks, and enhanced error handling
 - **OpenAPI Enhancements**: Add comprehensive XML documentation and FluentValidation
 
-### Quick Wins
-- Move repeated logic into Core/Utils
-- Add robust error messages with ProblemDetails responses
-- Enhanced request validation and error handling
-
 ## Contributing
 
+Contributions are always welcome!
+
 1. Fork the repository
-2. Create a feature branch
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Make your changes
 4. Add tests for new functionality
-5. Submit a pull request
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+Please ensure your code follows the existing code style and includes appropriate tests.
 
 ## License
 
