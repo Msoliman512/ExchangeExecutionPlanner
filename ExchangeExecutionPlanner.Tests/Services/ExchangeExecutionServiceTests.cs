@@ -271,5 +271,51 @@ namespace ExchangeExecutionPlanner.Tests.Services;
             Assert.Empty(plan.ExchangeExecutions);
             Assert.False(plan.IsFullyFilled);
         }
+        
+        [Fact]
+        public async Task GetExchangeCountAsync_Returns_CorrectCount()
+        {
+            // Arrange
+            var repoMock = new Mock<IExchangeRepository>();
+            repoMock.Setup(r => r.GetExchangeCountAsync()).ReturnsAsync(3);
+            var service = new ExchangeExecutionService(repoMock.Object);
+
+            // Act
+            var count = await service.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(3, count);
+        }
+
+        [Fact]
+        public async Task GetExchangeCountAsync_RepoReturnsNegative_ReturnsNegative()
+        {
+            // Arrange
+            var repoMock = new Mock<IExchangeRepository>();
+            repoMock.Setup(r => r.GetExchangeCountAsync()).ReturnsAsync(-1);
+            var service = new ExchangeExecutionService(repoMock.Object);
+
+            // Act
+            var count = await service.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(-1, count);
+        }
+
+        [Fact]
+        public async Task GetExchangeCountAsync_RepoThrowsException_ReturnsMinusOneAndLogs()
+        {
+            // Arrange
+            var repoMock = new Mock<IExchangeRepository>();
+            repoMock.Setup(r => r.GetExchangeCountAsync()).ThrowsAsync(new Exception("fail"));
+            var service = new ExchangeExecutionService(repoMock.Object);
+
+            // Act
+            var count = await service.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(-1, count);
+        }
+
     }
 

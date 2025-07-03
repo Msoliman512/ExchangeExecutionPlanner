@@ -126,4 +126,18 @@ public class ExchangeExecutionService : IExchangeExecutionService
             IsFullyFilled = totalFilled == amount
         };
     }
+    public async Task<int> GetExchangeCountAsync()
+    {
+        try
+        {
+            var count = await _repo.GetExchangeCountAsync();
+            Console.WriteLine($"[INFO] Loaded {count} exchanges from repository.");
+            return count;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[ERROR] Failed to get exchange count: {ex.Message}");
+            return -1;
+        }
+    }
 }
