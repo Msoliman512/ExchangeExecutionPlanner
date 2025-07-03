@@ -82,5 +82,57 @@ namespace TestProject1.Repositories
             // Cleanup
             Directory.Delete(folder, true);
         }
+        
+        [Fact]
+        public async Task GetExchangeCountAsync_Returns_CorrectCount()
+        {
+            // Arrange
+            var folder = PrepareTestData(
+                ("ex1.json", "{}"),
+                ("ex2.json", "{}"),
+                ("ex3.json", "{}")
+            );
+            var repo = new JsonExchangeRepository(folder);
+
+            // Act
+            var count = await repo.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(3, count);
+
+            // Cleanup
+            Directory.Delete(folder, true);
+        }
+
+        [Fact]
+        public async Task GetExchangeCountAsync_Returns_Zero_For_EmptyFolder()
+        {
+            // Arrange
+            var folder = PrepareTestData(); // no files
+            var repo = new JsonExchangeRepository(folder);
+
+            // Act
+            var count = await repo.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(0, count);
+
+            // Cleanup
+            Directory.Delete(folder, true);
+        }
+
+        [Fact]
+        public async Task GetExchangeCountAsync_Returns_MinusOne_For_MissingFolder()
+        {
+            // Arrange
+            var folder = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()); // does not exist!
+            var repo = new JsonExchangeRepository(folder);
+
+            // Act
+            var count = await repo.GetExchangeCountAsync();
+
+            // Assert
+            Assert.Equal(-1, count);
+        }
     }
 }

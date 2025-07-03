@@ -15,6 +15,15 @@ services.AddScoped<IExchangeExecutionService, ExchangeExecutionService>();
 // 2. Build service provider
 var provider = services.BuildServiceProvider();
 
+// (NEW) Show how many exchange files are loaded
+var repo = provider.GetRequiredService<IExchangeRepository>();
+var exchangeCount = await repo.GetExchangeCountAsync();
+if (exchangeCount >= 0)
+    Console.WriteLine($"[INFO] Loaded {exchangeCount} exchanges from data folder.");
+else
+    Console.WriteLine($"[WARN] Unable to count exchanges. See logs for details.");
+
+
 // 3. Get the service or repo from DI
 var executionService = provider.GetRequiredService<IExchangeExecutionService>();
 

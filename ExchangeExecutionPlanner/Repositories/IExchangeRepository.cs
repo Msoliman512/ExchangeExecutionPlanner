@@ -5,4 +5,5 @@ namespace ExchangeExecutionPlanner.Repositories;
 public interface IExchangeRepository
 {
     Task<List<Exchange>> LoadAllExchangesAsync();
+    Task<int> GetExchangeCountAsync();
 }

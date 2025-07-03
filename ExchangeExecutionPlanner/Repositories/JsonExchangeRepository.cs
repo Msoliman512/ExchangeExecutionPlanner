@@ -39,4 +39,28 @@ public class JsonExchangeRepository : IExchangeRepository
 
         return result;
     }
+    
+    public async Task<int> GetExchangeCountAsync()
+    {
+        try
+        {
+            return await Task.Run(() =>
+            {
+                var files = Directory.GetFiles(_folderPath, "*.json");
+                Console.WriteLine($"[INFO] Found {files.Length} exchange JSON files in: {_folderPath}");
+                return files.Length;
+            });
+        }
+        catch (DirectoryNotFoundException ex)
+        {
+            Console.WriteLine($"[ERROR] Exchange data directory not found: {_folderPath}. Error: {ex.Message}");
+            return -1;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[ERROR] Unexpected error while counting exchanges in: {_folderPath}. Error: {ex.Message}");
+            return -1;
+        }
+    }
+
 }
